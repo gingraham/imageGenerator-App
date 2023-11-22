@@ -24,12 +24,13 @@ app.post('/dream', async (req, res) => {
       n: 1,
       size: '1024x1024',
     });
-console.log(aiResponse)
+    console.log(aiResponse);
     const image = aiResponse.data[0].url;
     res.send({ image });
   } catch (error) {
-    console.error(error)
-    res.status(500).send(error?.response.data.error.message || 'Something went wrong');
+    console.error(error);
+    // Send error details as JSON
+    res.status(500).json({ error: error?.response?.data?.error?.message || 'Something went wrong' });
   }
 });
 
